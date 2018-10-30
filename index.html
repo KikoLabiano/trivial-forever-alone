@@ -1,11 +1,66 @@
 <html>
-    <head>
-        <title>Trivial forever alone</title>
-    </head>
-    <body>
-        <input type="button" id="newQ" value="Generar pregunta"/>
-        <script type="text/javascript" src="./js/jquery/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="./js/trivia-api.js"></script>
-        <script type="text/javascript" src="./js/trivia.js"></script>
-    </body>
+
+<head>
+  <title>Trivial forever alone</title>
+  <link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/trivia.css" />
+</head>
+
+<body>
+  <div class="container h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+      <form class="col-16">
+        <div class="card text-center cardQClass" style="width: 100rem;">
+          <div class="card-body">
+            <h5 class="card-title">Question</h5>
+            <p class="card-text" id="cardQ"></p>
+          </div>
+        </div>
+        <hr/>
+        <div class="row" id="cardA12">
+          <div class="col-sm-6 cardA">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text" id="cardA1Text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 cardA">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text" id="cardA2Text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br/>
+        <div class="row" id="cardA34">
+          <div class="col-sm-6 cardA">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text" id="cardA3Text"></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 cardA">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title"></h5>
+                <p class="card-text" id="cardA4Text"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script type="text/javascript" src="./js/jquery/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="./js/bootstrap/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./js/trivia-api.js"></script>
+  <script type="text/javascript" src="./js/trivia.js"></script>
+</body>
+
 </html>

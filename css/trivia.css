@@ -1,0 +1,4 @@
+.card:not(.cardQClass):hover{
+    background-color: rgba(128, 128, 128, 0.507);
+    cursor: pointer;
+}
