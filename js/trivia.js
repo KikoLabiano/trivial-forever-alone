@@ -3,51 +3,70 @@ var enumDif = {
 }
 
 $(function () {
-
-    // $("#newQ").on("click",function(e){
-    triviaAPI.getQuestion(1, 1, 1)
-        .then((q) => {
-            var {
-                response_code,
-                results: [{
-                    category,
-                    correct_answer,
-                    incorrect_answers: [a0, a1, a2],
-                    question,
-                    type
-                }]
-            } = q;
-            $("#cardQ").html(question);
-            console.log(q);
-            console.log(response_code);
-            console.log(category);
-            let answers = triviaAPI.shuffleAnswers([a0, a1, a2, correct_answer]);
-            if (type === "multiple") {
-                $("#cardA1Text").html(answers[0]);
-                $("#cardA2Text").html(answers[1]);
-                $("#cardA3Text").html(answers[2]);
-                $("#cardA4Text").html(answers[3]);
-            } else {
-                $("#cardA34").addClass("d-none");
-                answers = answers.filter((el) => {
-                    return el != null;
-                });
-                $("#cardA1Text").html(answers[0]);
-                $("#cardA2Text").html(answers[1]);
-            }
-
-            $(".cardA").each(function(){
-                $(this).on("click",function(){
-                    if($(this).find(".card-text").html() === correct_answer){
-                        $(this).find(".card-body").css("background-color","green");
-                    }
-                    else{
-                        $(this).find(".card-body").css("background-color","red");
-                    }
-                });
-            });
-
-
-        });
-    //  });
+    newQ(1,1,1);
 });
+
+function newQ(diff,cat,ty){
+    triviaAPI.getQuestion(diff,cat,ty)
+    .then((q) => {
+        var {
+            response_code,
+            results: [{
+                category,
+                correct_answer,
+                incorrect_answers: [a0, a1, a2],
+                question,
+                type
+            }]
+        } = q;
+        $("#cardQ").html(question);
+        console.log(q);
+        console.log(response_code);
+        console.log(category);
+        //Random order for answers
+        let answers = triviaAPI.shuffleAnswers([a0, a1, a2, correct_answer]);
+        //Assign text to cards
+        if (type === "multiple") {
+            $("#cardA1Text").html(answers[0]);
+            $("#cardA2Text").html(answers[1]);
+            $("#cardA3Text").html(answers[2]);
+            $("#cardA4Text").html(answers[3]);
+        } else {
+            //Hide row por non-multiple questions
+            $("#cardA34").addClass("d-none");
+            //Delete null/undefined answers (True/False type and posible API data errors)
+            answers = answers.filter((el) => {
+                return el != null;
+            });
+            $("#cardA1Text").html(answers[0]);
+            $("#cardA2Text").html(answers[1]);
+        }
+
+        //Card Click binding
+        $(".cardA").each(function(){
+            $(this).on("click",function(){
+                //It's a correct answer?
+                if($(this).find(".card-text").html() === correct_answer){
+                    $(this).find(".card-body").css("background-color","#47FF75");
+                }
+                else{
+                    $(this).find(".card-body").css("background-color","red");
+                    //If wrong answer find true one
+                    $(".cardA").each(function(){
+                        if($(this).find(".card-text").html() === correct_answer)
+                        {
+                            $(this).find(".card-body").css("background-color","#47FF75");
+                        }
+                    });
+                }
+                // setTimeout(function(){
+                //     $(".card-body").css("background-color","white");
+                //     newQ(1,1,1);
+                // },"1000");
+            });
+        });
+
+
+    });
+
+}
