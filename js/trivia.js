@@ -1,7 +1,3 @@
-var enumDif = {
-
-}
-
 $(function () {
     //newQ($("#trivia_difficulty").val(), $("#trivia_category").val(), $("#trivia_type").val());
     $("#btnNewQ").on("click", function () {
@@ -26,9 +22,6 @@ function newQ(diff, cat, ty) {
                     type
                 }]
             } = q;
-            console.log(q);
-            console.log(response_code);
-            console.log(category);
             $("#cardQ").html(question);
 
             //Random order for answers

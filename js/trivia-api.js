@@ -21,12 +21,25 @@ var triviaAPI = (function () {
                 type = "";
             }
             return fetch('https://opentdb.com/api.php?amount=1' + difficulty + category + type)
-                .then((response) => {
+                .then((response) => {                    
                     return response.json();
                 });
         },
         shuffleAnswers: (answers) => {
             return shuffle(answers);
+        },
+        runner: (gen) => {
+            const iterator = gen;
+            function run(arg) {
+                let res = iterator.next(arg);
+                if (res.done) {
+                    return res.value;
+                } else {
+                    return Promise.resolve(res.value).then(run);
+                }
+            }
+
+            return run();
         }
     };
 
