@@ -6,7 +6,7 @@ $(function () {
 
 function* getQ(diff, cat, ty) {
     //Clear responses background
-    $(".card-body").css("background-color", "white");
+    $(".card-body").not(".card-body-counter").css("background-color", "white");
 
     var q = yield triviaAPI.getQuestion(diff, cat, ty);
 
@@ -41,8 +41,7 @@ function* getQ(diff, cat, ty) {
     //Más manual
     let res = q.results[0];
     let [category,
-        correct_answer,
-        [a0, a1, a2],
+        correct_answer, [a0, a1, a2],
         question,
         type
     ] = [res.category, res.correct_answer, [res.incorrect_answers[0], res.incorrect_answers[1], res.incorrect_answers[2]], res.question, res.type];
@@ -75,19 +74,25 @@ function* getQ(diff, cat, ty) {
             //It's a correct answer?
             if ($(this).find(".card-text").html() === correct_answer) {
                 $(this).find(".card-body").css("background-color", "#47FF75");
+                $("#countCorrect").html(Number($("#countCorrect").html()) + 1);
+                // setTimeout(function () {
+                //     $(".card-body").css("background-color", "white");
+                //     triviaAPI.runner(getQ($("#trivia_difficulty").val(), $("#trivia_category").val(), $("#trivia_type").val()));
+                // }, "1000");
             } else {
                 $(this).find(".card-body").css("background-color", "red");
                 //If wrong answer find true one and mark it
                 $(".cardA").each(function () {
                     if ($(this).find(".card-text").html() === correct_answer) {
                         $(this).find(".card-body").css("background-color", "#47FF75");
+                        $("#countIncorrect").html(Number($("#countIncorrect").html()) + 1);
+                        // setTimeout(function () {
+                        //     $(".card-body").css("background-color", "white");
+                        //     triviaAPI.runner(getQ($("#trivia_difficulty").val(), $("#trivia_category").val(), $("#trivia_type").val()));
+                        // }, "1000");                       
                     }
                 });
             }
-            // setTimeout(function () {
-            //     $(".card-body").css("background-color", "white");                
-            // }, "1000");
-            // triviaAPI.runner(getQ($("#trivia_difficulty").val(), $("#trivia_category").val(), $("#trivia_type").val()));
         });
     });
 }

@@ -2,15 +2,26 @@
 
 <head>
   <title>Trivial forever alone</title>
-  <link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" href="./css/bootstrap/bootstrap.css" />
   <link rel="stylesheet" href="./css/trivia.css" />
 </head>
 
 <body>
-
-  <div class="container h-100">
+    <div class="card text-white bg-success mb-3 float-left" style="max-width: 18rem;">
+        <div class="card-header">Correct answers</div>
+        <div class="card-body card-body-counter">
+          <p class="card-text-counter" id="countCorrect">0</p>
+        </div>
+      </div>
+      <div class="card text-white bg-danger mb-3 float-right" style="max-width: 18rem;">
+          <div class="card-header">Incorrect answers</div>
+          <div class="card-body card-body-counter">
+            <p class="card-text-counter" id="countIncorrect">0</p>
+          </div>
+        </div>
+  <div class="container h-100">       
     <div class="row h-100 justify-content-center align-items-center">
-
+        
       <form class="col-16">
         <label for="trivia_category">Select Category: </label>
         <select id="trivia_category" name="trivia_category" class="form-control">
